@@ -6,23 +6,11 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 15:30:11 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 19:14:10 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 20:09:50 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// bool	get_flag(t_philo *philo, char *mes)
-// {
-// 	bool	ans;
-
-// 	pthread_mutex_lock(&philo->is_death);
-// 	ans = philo->is_dead;
-// 	if (ans)
-// 		action_message(mes, philo);
-// 	pthread_mutex_unlock(&philo->is_death);
-// 	return (ans);
-// }
 
 int	action_message(char *mes, t_philo *philo)
 {

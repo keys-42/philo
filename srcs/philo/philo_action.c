@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:02:05 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/07 19:36:32 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 20:09:42 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ int	ft_eat(t_philo *philo)
 
 int	ft_fork(t_philo *philo)
 {
-	if (action_message(FORK, philo))
-		return (1);
 	pthread_mutex_lock(&philo->fork1);
 	if (action_message(FORK, philo))
 		return (1);
 	pthread_mutex_lock(philo->fork2);
-	action_message(FORK, philo);
+	if (action_message(FORK, philo))
+	{
+		pthread_mutex_unlock(&philo->fork1);
+		return (1);
+	}
 	return (0);
 }
 
 int	ft_think(t_philo *philo)
 {
-	return (action_message( THINK,philo));
+	return (action_message(THINK, philo));
 }

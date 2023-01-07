@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 00:06:40 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 19:36:49 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 20:06:54 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ size_t	about_last_eat_time(t_philo *philo, int flag)
 	return (ans);
 }
 
-void	set_flag(t_philo *philo)
-{
-	philo->is_dead = true;
-	pthread_mutex_unlock(&philo->is_death);
-}
+// void	set_flag(t_philo *philo)
+// {
+// 	philo->is_dead = true;
+// 	pthread_mutex_unlock(&philo->is_death);
+// }
 
 bool	someone_dead(t_philo *philo)
 {
@@ -45,8 +45,11 @@ bool	someone_dead(t_philo *philo)
 	i = 0;
 	while (i < philo->data->philosophers_num)
 	{
-		set_flag(&philo->data->philo[i]);
+		philo->data->philo[i].is_dead = true;
+		pthread_mutex_unlock(&philo->data->philo[i].is_death);
 		i++;
+		// set_flag(&philo->data->philo[i]);
+		// i++;
 	}
 	pthread_mutex_lock(&philo->data->print);
 	printf(DIE, get_time() - philo->data->start, philo->id);
