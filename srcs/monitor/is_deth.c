@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 00:06:40 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 15:59:40 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 19:18:13 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,51 @@ size_t	about_last_eat_time(t_philo *philo, int flag)
 {
 	size_t	ans;
 
-	pthread_mutex_lock(&philo->data->last_eat_mutex[philo->id]);
+	pthread_mutex_lock(&philo->data->last_eat_mutex[philo->id - 1]);
 	if (flag == 0)
 	{
-		philo->data->last_eat_time[philo->id] = get_time();
+		philo->data->last_eat_time[philo->id - 1] = get_time();
 	}
-	ans = philo->data->last_eat_time[philo->id];
-	pthread_mutex_unlock(&philo->data->last_eat_mutex[philo->id]);
+	ans = philo->data->last_eat_time[philo->id - 1];
+	pthread_mutex_unlock(&philo->data->last_eat_mutex[philo->id - 1]);
 	return (ans);
 }
 
 void	set_flag(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->is_death);
 	philo->is_dead = true;
 	pthread_mutex_unlock(&philo->is_death);
 }
 
-void	dying_message(char *mes, t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->print);
-	printf(mes, get_time() - philo->data->start, philo->id);
-	usleep(5000);
-	pthread_mutex_unlock(&philo->data->print);
-}
+// void	dying_message(char *mes, t_philo *philo)
+// {
+// 	pthread_mutex_lock(&philo->data->print);
+// 	usleep(5000);
+// 	printf(mes, get_time() - philo->data->start, philo->id);
+// 	pthread_mutex_unlock(&philo->data->print);
+// }
 
-bool	someone_dead(t_data *data)
+bool	someone_dead(t_philo *philo)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < data->philosophers_num)
+	while (i < philo->data->philosophers_num)
 	{
-		set_flag(&data->philo[i]);
+		pthread_mutex_lock(&philo->data->philo[i].is_death);
 		i++;
 	}
-	data->is_dead = true;
-	dying_message(DIE, data->philo);
+	i = 0;
+	while (i < philo->data->philosophers_num)
+	{
+		set_flag(&philo->data->philo[i]);
+		i++;
+	}
+	// data->is_dead = true;
+	// dying_message(DIE, data->philo);
+	pthread_mutex_lock(&philo->data->print);
+	// usleep(5000);
+	printf(DIE, get_time() - philo->data->start, philo->id);
+	pthread_mutex_unlock(&philo->data->print);
 	return (true);
 }

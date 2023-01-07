@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:26:11 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 16:11:31 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 19:14:47 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	*philosophers(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 	{
-		action_message(THINK, philo);
+		// action_message(THINK, philo);
 		// if (philo->data->time_to_eat > 10000)
 		// usleep(philo->data->time_to_eat / 10);
+		usleep(200);
 		// else
-		// 	usleep(100);
+		// usleep(100);
 	}
 	while (42)
 	{

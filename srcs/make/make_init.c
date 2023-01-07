@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:12 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/07 16:09:35 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 18:00:20 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_make_data(t_data *data, int argc, char **argv)
 	while (i < data->philosophers_num)
 	{
 		data->number_of_meals[i] = tmp;
-		data->philo[i].id = (int)i;
+		data->philo[i].id = (int)i + 1;
 		data->philo[i].data = data;
 		i++;
 	}

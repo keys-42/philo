@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:19:42 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 15:58:03 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 19:18:14 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	is_alive(t_philo *philo)
 	now = moniter_time();
 	last = about_last_eat_time(philo, 1);
 	if ((now - last) > philo->data->time_to_die)
-		return (someone_dead(philo->data));
+		return (someone_dead(philo));
 	return (false);
 }
 

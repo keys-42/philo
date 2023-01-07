@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:12:03 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 15:57:30 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 19:17:59 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	bool			is_dead;
+	// bool			is_dead;
 	size_t			philosophers_num;
 	size_t			time_to_die;
 	size_t			time_to_eat;
@@ -72,8 +72,9 @@ int					ft_sleep(t_philo *philo);
 size_t				about_last_eat_time(t_philo *philo, int flag);
 void				*death_watch(void *arg);
 size_t				get_time(void);
-bool				get_deth_flag(t_philo *philo);
-void				action_message(char *mes, t_philo *philo);
-bool	someone_dead(t_data *data);
-
+// bool				get_deth_flag(t_philo *philo);
+// bool				get_deth_flag(t_philo *philo, char *mes, int flag);
+int					action_message(char *mes, t_philo *philo);
+// bool				someone_dead(t_data *data);
+bool				someone_dead(t_philo *philo);
 #endif
