@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 00:06:40 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 19:18:13 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/07 19:36:49 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ void	set_flag(t_philo *philo)
 	pthread_mutex_unlock(&philo->is_death);
 }
 
-// void	dying_message(char *mes, t_philo *philo)
-// {
-// 	pthread_mutex_lock(&philo->data->print);
-// 	usleep(5000);
-// 	printf(mes, get_time() - philo->data->start, philo->id);
-// 	pthread_mutex_unlock(&philo->data->print);
-// }
-
 bool	someone_dead(t_philo *philo)
 {
 	size_t	i;
@@ -56,10 +48,7 @@ bool	someone_dead(t_philo *philo)
 		set_flag(&philo->data->philo[i]);
 		i++;
 	}
-	// data->is_dead = true;
-	// dying_message(DIE, data->philo);
 	pthread_mutex_lock(&philo->data->print);
-	// usleep(5000);
 	printf(DIE, get_time() - philo->data->start, philo->id);
 	pthread_mutex_unlock(&philo->data->print);
 	return (true);
