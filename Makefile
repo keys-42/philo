@@ -1,12 +1,12 @@
 NAME = philo
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=undefined
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=leak
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 # CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=thread
-CFLAGS		=	-Wall -Wextra -Werror
+# CFLAGS		=	-Wall -Wextra -Werror
 INCLUDE		=	-I ./include/
 
 SRCS		= 	srcs/main.c \
