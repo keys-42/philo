@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:02:05 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/12 23:12:52 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/13 00:00:06 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,15 @@ int	ft_fork(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork1);
 	if (action_message(FORK, philo))
+	{
+		pthread_mutex_unlock(&philo->fork1);
 		return (1);
+	}
 	pthread_mutex_lock(philo->fork2);
 	if (action_message(FORK, philo))
 	{
 		pthread_mutex_unlock(&philo->fork1);
+		pthread_mutex_unlock(philo->fork2);
 		return (1);
 	}
 	return (0);
