@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:19:42 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 19:18:14 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 22:51:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,49 @@ bool	is_alive(t_philo *philo)
 		return (someone_dead(philo));
 	return (false);
 }
+bool	thread_stop(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < data->philosophers_num)
+	{
+		pthread_mutex_lock(&data->philo[i].is_death);
+		i++;
+	}
+	i = 0;
+	while (i < data->philosophers_num)
+	{
+		data->philo[i].is_dead = true;
+		pthread_mutex_unlock(&data->philo[i].is_death);
+		i++;
+		// set_flag(&philo->data->philo[i]);
+		// i++;
+	}
+	return (true);
+}
+bool	can_eat(t_data *data)
+{
+	bool	which;
+	size_t	i;
+
+	which = true;
+	i = 0;
+	pthread_mutex_lock(&data->meals);
+	while (i < data->philosophers_num)
+	{
+		if (!data->b_meals[i])
+		{
+			which = false;
+			break ;
+		}
+		i++;
+	}
+	pthread_mutex_unlock(&data->meals);
+	if (which)
+		return (thread_stop(data));
+	return (which);
+}
 
 void	*death_watch(void *arg)
 {
@@ -55,6 +98,8 @@ void	*death_watch(void *arg)
 				return (NULL);
 			i++;
 		}
+		if (can_eat(data))
+			return (NULL);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:12 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/07 18:00:20 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 22:33:44 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ int	ft_make_data(t_data *data, int argc, char **argv)
 	size_t	i;
 
 	i = 0;
+	tmp = 0;
 	data->philosophers_num = (size_t)ft_atol(argv[0]);
 	data->time_to_die = (size_t)ft_atol(argv[1]);
 	data->time_to_eat = (size_t)ft_atol(argv[2]);
 	data->time_to_sleep = (size_t)ft_atol(argv[3]);
 	if (argc == 5)
+	{
+		data->is_meals = true;
 		tmp = (size_t)ft_atol(argv[4]);
+	}
 	while (i < data->philosophers_num)
 	{
 		data->number_of_meals[i] = tmp;
@@ -62,6 +66,7 @@ int	ft_make_mutex(t_data *data)
 	data->philo[i].fork2 = &data->philo[0].fork1;
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->death_check, NULL);
+	pthread_mutex_init(&data->meals, NULL);
 	return (0);
 }
 
