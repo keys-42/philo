@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:12 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/12 22:33:44 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 23:32:07 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ int	ft_make_mutex(t_data *data)
 	return (0);
 }
 
+static int	ft_destory(t_data *data)
+{
+	int	i;
+	int	j;
+
+	j = (int)data->philosophers_num;
+	i = 0;
+	while (i < j)
+	{
+		pthread_mutex_destroy(&data->philo[i].fork1);
+		pthread_mutex_destroy(&data->last_eat_mutex[i]);
+		pthread_mutex_destroy(&data->philo[i].is_death);
+		i++;
+	}
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->death_check);
+	pthread_mutex_destroy(&data->meals);
+	return (0);
+}
+
 int	ft_make_thread(t_data *data)
 {
 	int			j;
@@ -96,5 +116,5 @@ int	ft_make_thread(t_data *data)
 		pthread_join(data->thread[i], NULL);
 		i++;
 	}
-	return (0);
+	return (ft_destory(data));
 }
