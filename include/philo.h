@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:12:03 by keys              #+#    #+#             */
-/*   Updated: 2023/01/12 22:40:41 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 22:59:32 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_data
 	t_philo			philo[200];
 	pthread_t		thread[200];
 	size_t			number_of_meals[200];
-	pthread_mutex_t meals;
+	pthread_mutex_t	meals;
 	bool			b_meals[200];
 	pthread_mutex_t	death_check;
 	pthread_mutex_t	print;
