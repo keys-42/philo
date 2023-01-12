@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:02:05 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/12 23:02:26 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 23:12:52 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_sleep(t_philo *philo)
 	return (0);
 }
 
-void	ft_eat_utils(t_philo *philo)
+static void	ft_eat_utils(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->meals);
 	philo->data->b_meals[philo->id - 1] = true;

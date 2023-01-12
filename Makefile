@@ -21,7 +21,7 @@ SRCS		= 	srcs/main.c \
 				srcs/utils/ft_atol.c \
 				srcs/utils/ft_isdigit.c \
 				srcs/utils/ft_isspace.c \
-				srcs/time.c
+				srcs/utils/time.c
 
 OBJDIR   = obj
 OBJS  = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

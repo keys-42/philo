@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:19:42 by keys              #+#    #+#             */
-/*   Updated: 2023/01/12 23:00:15 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 23:11:48 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static size_t	moniter_time(void)
 	return (time);
 }
 
-bool	is_alive(t_philo *philo)
+static bool	is_alive(t_philo *philo)
 {
 	size_t	now;
 	size_t	last;
@@ -38,7 +38,7 @@ bool	is_alive(t_philo *philo)
 	return (false);
 }
 
-bool	thread_stop(t_data *data)
+static bool	thread_stop(t_data *data)
 {
 	size_t	i;
 
@@ -58,7 +58,7 @@ bool	thread_stop(t_data *data)
 	return (true);
 }
 
-bool	can_eat(t_data *data)
+static bool	can_eat(t_data *data)
 {
 	bool	which;
 	size_t	i;

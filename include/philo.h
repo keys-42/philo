@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:12:03 by keys              #+#    #+#             */
-/*   Updated: 2023/01/12 22:59:32 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/12 23:14:23 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,29 @@ typedef struct s_data
 }					t_data;
 
 int					ft_checks(t_data *data, int argc, char **argv);
+
 int					ft_make_data(t_data *data, int argc, char **argv);
 int					ft_make_mutex(t_data *data);
 int					ft_make_thread(t_data *data);
-int					ft_error_print(char *mes);
+
+size_t				about_last_eat_time(t_philo *philo, int flag);
+bool				someone_dead(t_philo *philo);
+
+void				*death_watch(void *arg);
+
+int					ft_sleep(t_philo *philo);
+int					ft_eat(t_philo *philo);
+int					ft_fork(t_philo *philo);
+int					ft_think(t_philo *philo);
+
+void				*philosophers(void *arg);
+
+int					action_message(char *mes, t_philo *philo);
+
 long				ft_atol(const char *nptr);
 int					ft_isdigit(int c);
 int					ft_isspace(int c);
-void				*philosophers(void *arg);
-int					ft_think(t_philo *philo);
-int					ft_fork(t_philo *philo);
-int					ft_eat(t_philo *philo);
-int					ft_sleep(t_philo *philo);
-size_t				about_last_eat_time(t_philo *philo, int flag);
-void				*death_watch(void *arg);
 size_t				get_time(void);
-int					action_message(char *mes, t_philo *philo);
-bool				someone_dead(t_philo *philo);
+
+int					ft_error_print(char *mes);
 #endif
