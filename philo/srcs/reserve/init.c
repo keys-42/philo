@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_init.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:12 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/12 23:32:07 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/13 03:59:58 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_make_data(t_data *data, int argc, char **argv)
 	{
 		data->number_of_meals[i] = tmp;
 		data->philo[i].id = (int)i + 1;
+		data->philo[i].index = (int)i;
 		data->philo[i].data = data;
 		i++;
 	}
@@ -54,7 +55,7 @@ int	ft_make_mutex(t_data *data)
 	{
 		pthread_mutex_init(&data->philo[i].fork1, NULL);
 		pthread_mutex_init(&data->last_eat_mutex[i], NULL);
-		pthread_mutex_init(&data->philo[i].is_death, NULL);
+		pthread_mutex_init(&data->stop[i], NULL);
 		i++;
 	}
 	i = 0;
@@ -65,8 +66,6 @@ int	ft_make_mutex(t_data *data)
 	}
 	data->philo[i].fork2 = &data->philo[0].fork1;
 	pthread_mutex_init(&data->print, NULL);
-	pthread_mutex_init(&data->death_check, NULL);
-	pthread_mutex_init(&data->meals, NULL);
 	return (0);
 }
 
@@ -81,12 +80,10 @@ static int	ft_destory(t_data *data)
 	{
 		pthread_mutex_destroy(&data->philo[i].fork1);
 		pthread_mutex_destroy(&data->last_eat_mutex[i]);
-		pthread_mutex_destroy(&data->philo[i].is_death);
+		pthread_mutex_destroy(&data->stop[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&data->print);
-	pthread_mutex_destroy(&data->death_check);
-	pthread_mutex_destroy(&data->meals);
 	return (0);
 }
 

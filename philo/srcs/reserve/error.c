@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_message.c                                   :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 15:30:11 by keys              #+#    #+#             */
-/*   Updated: 2023/01/12 22:59:24 by kyoda            ###   ########.fr       */
+/*   Created: 2023/01/07 14:44:11 by kyoda             #+#    #+#             */
+/*   Updated: 2023/01/13 03:59:51 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	action_message(char *mes, t_philo *philo)
+int	ft_error_print(char *mes)
 {
-	size_t	time;
-	bool	ans;
-
-	pthread_mutex_lock(&philo->data->print);
-	pthread_mutex_lock(&philo->is_death);
-	ans = philo->is_dead;
-	pthread_mutex_unlock(&philo->is_death);
-	if (!ans)
-	{
-		time = get_time() - philo->data->start;
-		printf(mes, time, philo->id);
-		pthread_mutex_unlock(&philo->data->print);
-		return (0);
-	}
-	pthread_mutex_unlock(&philo->data->print);
+	printf("%s\n", mes);
 	return (1);
 }

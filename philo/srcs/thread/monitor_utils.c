@@ -1,48 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_deth.c                                          :+:      :+:    :+:   */
+/*   monitor_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 00:06:40 by keys              #+#    #+#             */
-/*   Updated: 2023/01/12 22:59:52 by kyoda            ###   ########.fr       */
+/*   Created: 2023/01/13 04:15:12 by kyoda             #+#    #+#             */
+/*   Updated: 2023/01/13 04:24:24 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	about_last_eat_time(t_philo *philo, int flag)
-{
-	size_t	ans;
-
-	pthread_mutex_lock(&philo->data->last_eat_mutex[philo->id - 1]);
-	if (flag == 0)
-	{
-		philo->data->last_eat_time[philo->id - 1] = get_time();
-	}
-	ans = philo->data->last_eat_time[philo->id - 1];
-	pthread_mutex_unlock(&philo->data->last_eat_mutex[philo->id - 1]);
-	return (ans);
-}
-
-bool	someone_dead(t_philo *philo)
+bool	thread_stop(t_data *data)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < philo->data->philosophers_num)
+	while (i < data->philosophers_num)
 	{
-		pthread_mutex_lock(&philo->data->philo[i].is_death);
+		pthread_mutex_lock(&data->stop[i]);
 		i++;
 	}
 	i = 0;
-	while (i < philo->data->philosophers_num)
+	while (i < data->philosophers_num)
 	{
-		philo->data->philo[i].is_dead = true;
-		pthread_mutex_unlock(&philo->data->philo[i].is_death);
+		data->philo[i].finish = true;
+		pthread_mutex_unlock(&data->stop[i]);
 		i++;
 	}
+	return (true);
+}
+
+bool	someone_dead(t_philo *philo)
+{
+	thread_stop(philo->data);
 	pthread_mutex_lock(&philo->data->print);
 	printf(DIE, get_time() - philo->data->start, philo->id);
 	pthread_mutex_unlock(&philo->data->print);

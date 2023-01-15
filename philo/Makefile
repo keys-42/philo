@@ -1,18 +1,23 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror# -fsanitize=thread
+# CFLAGS = -Wall -Wextra -Werror -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror
 INCLUDE		=	-I ./include/
 
 SRCS		= 	srcs/main.c \
-				srcs/checks/checks.c \
-				srcs/make/make_init.c \
-				srcs/monitor/is_deth.c \
-				srcs/monitor/monitor.c \
-				srcs/philo/philo_action.c \
-				srcs/philo/philo.c \
-				srcs/print/error.c \
-				srcs/print/action_message.c \
+				srcs/reserve/checks.c \
+				srcs/reserve/init.c \
+				srcs/reserve/error.c \
+				srcs/thread/philo/eat.c \
+				srcs/thread/philo/fork.c \
+				srcs/thread/philo/philo_utils.c \
+				srcs/thread/philo/philo.c \
+				srcs/thread/philo/sleep.c \
+				srcs/thread/philo/think.c \
+				srcs/thread/message.c \
+				srcs/thread/monitor.c \
+				srcs/thread/monitor_utils.c \
 				srcs/utils/ft_atol.c \
 				srcs/utils/ft_isdigit.c \
 				srcs/utils/ft_isspace.c \

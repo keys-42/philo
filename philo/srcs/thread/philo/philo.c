@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:26:11 by keys              #+#    #+#             */
-/*   Updated: 2023/01/07 20:03:21 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/13 04:00:11 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,17 @@
 
 static void	one_philo(t_philo *philo)
 {
-	bool	ans;
+	size_t	time;
 
 	pthread_mutex_lock(&philo->fork1);
-	if (action_message(FORK, philo))
-		return ;
+	time = get_time() - philo->data->start;
+	pthread_mutex_lock(&philo->data->print);
+	printf(FORK, time, philo->id);
+	pthread_mutex_unlock(&philo->data->print);
 	while (42)
 	{
-		pthread_mutex_lock(&philo->is_death);
-		ans = philo->is_dead;
-		pthread_mutex_unlock(&philo->is_death);
-		if (ans)
-		{
-			pthread_mutex_unlock(&philo->fork1);
-			return ;
-		}
+		usleep(10000);
+		break ;
 	}
 }
 
@@ -48,7 +44,7 @@ void	*philosophers(void *arg)
 	{
 		if (ft_fork(philo))
 			break ;
-		if (ft_eat(philo))
+		if (ft_eat(philo, philo->data))
 			break ;
 		if (ft_sleep(philo))
 			break ;

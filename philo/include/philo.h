@@ -6,7 +6,7 @@
 /*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:12:03 by keys              #+#    #+#             */
-/*   Updated: 2023/01/12 23:14:23 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/13 04:24:19 by kyoda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@
 typedef struct s_philo
 {
 	int				id;
+	int				index;
 	struct s_data	*data;
-	bool			is_dead;
+	bool			finish;
 	pthread_mutex_t	fork1;
 	pthread_mutex_t	*fork2;
-	pthread_mutex_t	is_death;
 }					t_philo;
 
 typedef struct s_data
@@ -51,37 +51,35 @@ typedef struct s_data
 	t_philo			philo[200];
 	pthread_t		thread[200];
 	size_t			number_of_meals[200];
-	pthread_mutex_t	meals;
-	bool			b_meals[200];
-	pthread_mutex_t	death_check;
+	bool			end[200];
 	pthread_mutex_t	print;
 	pthread_mutex_t	last_eat_mutex[200];
+	pthread_mutex_t	stop[200];
 }					t_data;
 
 int					ft_checks(t_data *data, int argc, char **argv);
+int					ft_error_print(char *mes);
 
 int					ft_make_data(t_data *data, int argc, char **argv);
 int					ft_make_mutex(t_data *data);
 int					ft_make_thread(t_data *data);
 
-size_t				about_last_eat_time(t_philo *philo, int flag);
+int					ft_eat(t_philo *philo, t_data *data);
+int					ft_fork(t_philo *philo);
+int					ft_mutex_unlock(pthread_mutex_t *mutex1,
+						pthread_mutex_t *mutex2, int flag);
+void				*philosophers(void *arg);
+int					ft_sleep(t_philo *philo);
+int					ft_think(t_philo *philo);
+int					message(char *mes, t_philo *philo);
 bool				someone_dead(t_philo *philo);
+bool				thread_stop(t_data *data);
 
 void				*death_watch(void *arg);
-
-int					ft_sleep(t_philo *philo);
-int					ft_eat(t_philo *philo);
-int					ft_fork(t_philo *philo);
-int					ft_think(t_philo *philo);
-
-void				*philosophers(void *arg);
-
-int					action_message(char *mes, t_philo *philo);
 
 long				ft_atol(const char *nptr);
 int					ft_isdigit(int c);
 int					ft_isspace(int c);
 size_t				get_time(void);
 
-int					ft_error_print(char *mes);
 #endif
