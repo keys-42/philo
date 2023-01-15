@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:19:42 by keys              #+#    #+#             */
-/*   Updated: 2023/01/13 04:31:17 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/15 18:34:04 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,10 @@ static bool	can_eat(t_data *data)
 void	*death_watch(void *arg)
 {
 	t_data	*data;
-	size_t	j;
-	size_t	i;
 
 	data = (t_data *)arg;
-	j = data->philosophers_num;
 	while (42)
 	{
-		i = 0;
 		if (is_alive(data, data->philo))
 			return (NULL);
 		if (can_eat(data))
