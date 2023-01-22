@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 01:39:19 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/22 11:34:03 by keys             ###   ########.fr       */
+/*   Updated: 2023/01/22 11:42:30 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	eat_stamp(t_data *data, t_philo *philo)
 	data->last_eat_time[philo->index] = time;
 	pthread_mutex_unlock(&data->last_eat_mutex[philo->index]);
 	while (get_time() - time < philo->data->time_to_eat)
-		usleep(250);
+		usleep(100);
 	return (0);
 }
 
