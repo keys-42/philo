@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 01:39:19 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/18 22:55:57 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/22 11:34:03 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	eat_stamp(t_data *data, t_philo *philo)
 	data->last_eat_time[philo->index] = time;
 	pthread_mutex_unlock(&data->last_eat_mutex[philo->index]);
 	while (get_time() - time < philo->data->time_to_eat)
-		usleep(100);
+		usleep(250);
 	return (0);
 }
 

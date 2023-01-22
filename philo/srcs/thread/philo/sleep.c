@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 01:39:13 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/13 04:07:51 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/22 11:34:10 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	ft_sleep(t_philo *philo)
 		return (1);
 	start = get_time();
 	while (get_time() - start < philo->data->time_to_sleep)
-		usleep(100);
+		usleep(250);
 	return (0);
 }
