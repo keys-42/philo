@@ -6,7 +6,7 @@
 /*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:26:11 by keys              #+#    #+#             */
-/*   Updated: 2023/01/22 11:32:53 by keys             ###   ########.fr       */
+/*   Updated: 2023/01/22 11:40:26 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*philosophers(void *arg)
 		one_philo(philo);
 		return (NULL);
 	}
-	if (philo->id % 2 == 1)
+	if (philo->id % 2 == 0)
 	{
 		message(THINK, philo);
 		usleep(100);
