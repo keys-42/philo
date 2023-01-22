@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 18:26:11 by keys              #+#    #+#             */
-/*   Updated: 2023/01/13 04:00:11 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/22 11:32:53 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@ static void	one_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->print);
 	while (42)
 	{
-		usleep(10000);
-		break ;
+		pthread_mutex_lock(&philo->data->stop[philo->index]);
+		if (philo->finish)
+		{
+			pthread_mutex_unlock(&philo->data->stop[philo->index]);
+			return ;
+		}
+		pthread_mutex_unlock(&philo->data->stop[philo->index]);
 	}
 }
 
@@ -38,8 +43,11 @@ void	*philosophers(void *arg)
 		one_philo(philo);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 == 1)
+	{
+		message(THINK, philo);
 		usleep(100);
+	}
 	while (42)
 	{
 		if (ft_fork(philo))
