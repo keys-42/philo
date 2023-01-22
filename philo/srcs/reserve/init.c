@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:55:12 by kyoda             #+#    #+#             */
-/*   Updated: 2023/01/13 03:59:58 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/19 12:13:11 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,10 @@ int	ft_make_thread(t_data *data)
 	while (i < j)
 	{
 		data->last_eat_time[i] = data->start;
-		if (pthread_create(&data->thread[i], NULL, philosophers,
-				&data->philo[i]) != 0)
-			return (1);
+		pthread_create(&data->thread[i], NULL, philosophers, &data->philo[i]);
 		i++;
 	}
-	if (pthread_create(&monitor, NULL, death_watch, data) != 0)
-		return (1);
+	pthread_create(&monitor, NULL, death_watch, data);
 	pthread_join(monitor, NULL);
 	i = 0;
 	while (i < j)

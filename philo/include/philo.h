@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoda <kyoda@student.42tokyo.jp>           +#+  +:+       +#+        */
+/*   By: keys <keys@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 16:12:03 by keys              #+#    #+#             */
-/*   Updated: 2023/01/13 04:24:19 by kyoda            ###   ########.fr       */
+/*   Updated: 2023/01/19 12:15:18 by keys             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data
 	pthread_mutex_t	stop[200];
 }					t_data;
 
-int					ft_checks(t_data *data, int argc, char **argv);
+int					ft_checks(int argc, char **argv);
 int					ft_error_print(char *mes);
 
 int					ft_make_data(t_data *data, int argc, char **argv);
